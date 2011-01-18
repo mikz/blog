@@ -1,0 +1,17 @@
+base: &base
+  adapter: postgresql
+  host: localhost
+  username: user
+  password: 
+  
+development: 
+  <<: *base
+  database: blog-dev
+
+test:
+  <<: *base
+  database: blog-test
+
+production:
+  <<: *base
+  database: blog
