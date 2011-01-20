@@ -1,4 +1,6 @@
 class Admin::BaseController < ApplicationController
+  include InheritedResources::DSL
+  
   layout 'admin'
 
   before_filter :require_login

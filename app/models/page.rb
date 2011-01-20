@@ -1,4 +1,6 @@
 class Page < ActiveRecord::Base
+  include Format::PageMethods
+  
   validates_presence_of :title, :slug, :body
 
   before_validation     :generate_slug
@@ -11,10 +13,6 @@ class Page < ActiveRecord::Base
       page.apply_filter
       page
     end
-  end
-
-  def apply_filter
-    self.body_html = EnkiFormatter.format_as_xhtml(self.body)
   end
 
   def active?

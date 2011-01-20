@@ -1,5 +1,5 @@
 Enki::Application.routes.draw do
-  namespace 'admin' do
+  namespace :admin do
     resource :session
 
     resources :posts, :pages do
@@ -17,7 +17,8 @@ Enki::Application.routes.draw do
 
   resources :archives, :only => [:index]
   resources :pages, :only => [:show]
-
+  resources :posts, :only => [:show]
+  
   constraints :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ do
     post ':year/:month/:day/:slug/comments' => 'comments#index'
     get ':year/:month/:day/:slug/comments/new' => 'comments#new'

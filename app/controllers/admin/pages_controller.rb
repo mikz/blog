@@ -1,4 +1,6 @@
 class Admin::PagesController < Admin::BaseController
+  inherit_resources
+  
   before_filter :find_page, :only => [:show, :update, :destroy]
 
   def index
@@ -12,35 +14,12 @@ class Admin::PagesController < Admin::BaseController
     end
   end
 
-  def create
-    @page = Page.new(params[:page])
-    if @page.save
-      respond_to do |format|
-        format.html {
-          flash[:notice] = "Created page '#{@page.title}'"
-          redirect_to(:action => 'show', :id => @page)
-        }
-      end
-    else
-      respond_to do |format|
-        format.html { render :action => 'new',         :status => :unprocessable_entity }
-      end
-    end
+  create! do |success, failure|
+    failure.html { render :action => 'new', :status => :unprocessable_entity }
   end
 
-  def update
-    if @page.update_attributes(params[:page])
-      respond_to do |format|
-        format.html {
-          flash[:notice] = "Updated page '#{@page.title}'"
-          redirect_to(:action => 'show', :id => @page)
-        }
-      end
-    else
-      respond_to do |format|
-        format.html { render :action => 'show',        :status => :unprocessable_entity }
-      end
-    end
+  update! do |success, failure|
+    failure.html { render :action => 'show', :status => :unprocessable_entity }
   end
 
   def show
@@ -49,10 +28,6 @@ class Admin::PagesController < Admin::BaseController
         render :partial => 'page', :locals => {:page => @page} if request.xhr?
       }
     end
-  end
-
-  def new
-    @page = Page.new
   end
 
   def preview

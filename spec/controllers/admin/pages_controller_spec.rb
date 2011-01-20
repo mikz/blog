@@ -92,6 +92,7 @@ describe Admin::PagesController do
     before(:each) do
       @page = mock_model(Page)
       @page.stub!(:update_attributes).and_return(false)
+      @page.stub!(:errors).and_return([true]) # inherited resources checks this and decides to call success or false
       Page.stub!(:find).and_return(@page)
     end
 

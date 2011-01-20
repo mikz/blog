@@ -1,4 +1,10 @@
 class Admin::PostsController < Admin::BaseController
+  inherit_resources
+  defaults :resource_class => Post
+  
+  respond_to :html, :except => [:preview]
+  respond_to :js, :only => [:preview]
+  
   before_filter :find_post, :only => [:show, :update, :destroy]
 
   def index
@@ -12,37 +18,6 @@ class Admin::PostsController < Admin::BaseController
     end
   end
 
-  def create
-    @post = Post.new(params[:post])
-    if @post.save
-      respond_to do |format|
-        format.html {
-          flash[:notice] = "Created post '#{@post.title}'"
-          redirect_to(:action => 'show', :id => @post)
-        }
-      end
-    else
-      respond_to do |format|
-        format.html { render :action => 'new',         :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    if @post.update_attributes(params[:post])
-      respond_to do |format|
-        format.html {
-          flash[:notice] = "Updated post '#{@post.title}'"
-          redirect_to(:action => 'show', :id => @post)
-        }
-      end
-    else
-      respond_to do |format|
-        format.html { render :action => 'show',        :status => :unprocessable_entity }
-      end
-    end
-  end
-
   def show
     respond_to do |format|
       format.html {
@@ -50,9 +25,13 @@ class Admin::PostsController < Admin::BaseController
       }
     end
   end
+  
+  create! do |success, failure|
+    failure.html { render :action => 'new', :status => :unprocessable_entity }
+  end
 
-  def new
-    @post = Post.new
+  update! do |success, failure|
+    failure.html { render :action => 'show', :status => :unprocessable_entity }
   end
 
   def preview

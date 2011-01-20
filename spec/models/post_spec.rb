@@ -227,8 +227,8 @@ describe Post, '.build_for_preview' do
     @post.published_at.should_not be_nil
   end
 
-  it 'applies filter to body' do
-    @post.body_html.should == '<p>body</p>'
+  it 'applies no filter to body' do
+    @post.body_html.should == 'body'
   end
 
   it 'generates tags from tag_list' do

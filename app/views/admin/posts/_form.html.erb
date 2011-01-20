@@ -4,9 +4,11 @@
 
 <%= form.inputs do -%>
   <%= form.input :title -%>
-  <%= form.input :body, :hint => "<a href='http://textile.thresholdstate.com/'>Textile enabled</a>. Use Ctrl+E to switch between preview and edit mode.".html_safe -%>
+  <%= form.input :body, :hint => "Use Ctrl+E to switch between preview and edit mode." %>
+  <%= form.input :format, :hint => "Select page formatter"%>
   <%= form.input :tag_list, :as => 'string', :required => false, :hint => 'Comma separated: ruby, rails&hellip;'.html_safe -%>
 <% end -%>
+
 <%= form.inputs do -%>
   <%= form.input :published_at_natural, :label => 'Published at', :as => 'string', :hint => 'Example: now, yesterday, 1 hour from now, '.html_safe + link_to("more&hellip;".html_safe, "http://chronic.rubyforge.org/") -%>
   <%= form.input :slug, :hint => "Leave blank for an auto-generated slug based on the title." -%>

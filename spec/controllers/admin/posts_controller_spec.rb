@@ -86,6 +86,7 @@ describe Admin::PostsController do
     before(:each) do
       @post = mock_model(Post)
       @post.stub!(:update_attributes).and_return(false)
+      @post.stub!(:errors).and_return([true]) # inherited resources checks this and decides to call success or false
       Post.stub!(:find).and_return(@post)
     end
 

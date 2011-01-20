@@ -40,5 +40,9 @@ describe String, '#slugorize' do
 	it "should collapse multiple dashes" do
 		"abc---xyz".slugorize.should == "abc-xyz"
 	end
+	
+	it "should lowercase and transliterate Czech characters" do
+	  "Žluťoučký kůň".slugorize.should == "zlutoucky-kun"
+  end
 end
 

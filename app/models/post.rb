@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   DEFAULT_LIMIT = 15
 
   acts_as_taggable
+  include Format::PageMethods
 
   has_many                :comments, :dependent => :destroy
   has_many                :approved_comments, :class_name => 'Comment'
@@ -96,10 +97,6 @@ class Post < ActiveRecord::Base
 
   def month
     published_at.beginning_of_month
-  end
-
-  def apply_filter
-    self.body_html = EnkiFormatter.format_as_xhtml(self.body)
   end
 
   def set_dates
