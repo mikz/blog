@@ -2,7 +2,20 @@ module ApplicationHelper
   def author
     Struct.new(:name, :email).new(enki_config[:author][:name], enki_config[:author][:email])
   end
-
+  
+  def head_js(*scripts)
+    raw "head.js(#{scripts.flatten.map{|src| path_to_javascript src.to_s}.to_json});"
+  end
+  
+  def javascript *scripts
+    @javascripts ||= []
+    @javascripts.push *scripts.flatten
+  end
+  
+  def javascripts
+    @javascripts
+  end
+  
   def open_id_delegation_link_tags(server, delegate)
     raw links = <<-EOS
       <link rel="openid.server" href="#{server}">

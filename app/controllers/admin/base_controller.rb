@@ -3,15 +3,16 @@ class Admin::BaseController < ApplicationController
   
   layout 'admin'
 
-  before_filter :require_login
+  before_filter :authenticate_user!, :require_admin!
+  
 
   protected
 
-  def require_login
-    return redirect_to(admin_session_path) unless session[:logged_in]
+  def set_locale
+    I18n.locale = :en
   end
-
-  def set_content_type
-    headers['Content-Type'] ||= 'text/html; charset=utf-8'
+  
+  def require_admin!
+    raise "Permission Denied" unless current_user.admin?
   end
 end

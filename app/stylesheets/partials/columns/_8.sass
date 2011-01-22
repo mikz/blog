@@ -1,0 +1,10 @@
+/* Default 8-column layout
+ * For tablets at 768 px, netbooks, and old browsers. */
+
+body
+  @include grid(8)
+  #main
+    @include column(6)
+  #navigation
+    @include column(2, true)
+  

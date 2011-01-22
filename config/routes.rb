@@ -1,4 +1,16 @@
 Enki::Application.routes.draw do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } do
+    user = Devise.mappings[:user]
+
+    with_devise_exclusive_scope user.fullpath, user.name do
+      devise_session user, user.controllers
+    end
+  end
+  
+  namespace :users do
+    resources :authentications, :only => [:index, :destroy]
+  end
+  
   namespace :admin do
     resource :session
 

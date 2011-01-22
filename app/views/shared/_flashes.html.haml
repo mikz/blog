@@ -1,0 +1,4 @@
+- unless flash.empty?
+  #flash
+    - flash.each_pair do |key, msg|
+      %div{:class => key}= msg

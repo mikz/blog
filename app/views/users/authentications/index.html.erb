@@ -1,0 +1,25 @@
+
+<% if @authentications %>
+  <% unless @authentications.empty? %>
+    <p><strong>You have signed in with these services:</strong></p>
+    <div class="authentications">
+      <% for auth in @authentications %>
+        <div class="authentication">
+          <%= auth_img auth.provider%>
+          <div class="provider"><%= auth.provider_name %></div>
+          <div class="uid"><%= auth.uid %></div>
+          <%= link_to "X", users_authentication_path(auth), :confirm => 'Are you sure you want to remove this authentication option?', :method => :delete, :class => "remove" %>
+        </div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+  <p><strong>Add another service to sign in with:</strong></p>
+<% else %>
+  <p><strong>Sign in through one of these services:</strong></p>
+<% end %>
+
+
+<%= render :partial => "shared/auth_providers" %>
+
+<div class="clear"></div>

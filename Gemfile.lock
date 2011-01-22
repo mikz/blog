@@ -5,6 +5,15 @@ GIT
   specs:
     will_paginate (3.0.pre3)
 
+GIT
+  remote: https://github.com/plataformatec/devise.git
+  revision: 68f699bfd4d027e77fd8b8f8969cf951d9f3f550
+  specs:
+    devise (1.2.rc)
+      bcrypt-ruby (~> 2.1.2)
+      orm_adapter (~> 0.0.3)
+      warden (~> 1.0.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -37,11 +46,19 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
+    addressable (2.2.3)
     arel (2.0.7)
     awesome_print (0.3.1)
+    bcrypt-ruby (2.1.4)
     builder (2.1.2)
+    chunky_png (0.10.5)
     coderay (0.9.7)
     columnize (0.3.2)
+    compass (0.11.beta.1)
+      chunky_png (~> 0.10.3)
+      sass (>= 3.1.0.alpha.50)
+    compass-less-plugin (0.8)
+      compass (>= 0.10)
     cucumber (0.10.0)
       builder (>= 2.1.2)
       diff-lcs (~> 1.1.2)
@@ -54,13 +71,18 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     factory_girl (1.3.3)
+    faraday (0.5.4)
+      addressable (~> 2.2.2)
+      multipart-post (~> 1.1.0)
+      rack (>= 1.1.0, < 2)
+    foreigner (0.9.1)
     formtastic (1.2.3)
       actionpack (>= 2.3.7)
       activesupport (>= 2.3.7)
       i18n (~> 0.4)
     gherkin (2.3.3)
       json (~> 1.4.6)
-    haml (3.0.25)
+    haml (3.1.0.alpha.147)
     has_scope (0.5.0)
     hpricot (0.8.3)
     i18n (0.5.0)
@@ -76,9 +98,47 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    multi_json (0.0.5)
+    multipart-post (1.1.0)
+    net-ldap (0.1.1)
     nokogiri (1.4.4)
+    oa-basic (0.1.6)
+      multi_json (~> 0.0.2)
+      nokogiri (~> 1.4.2)
+      oa-core (= 0.1.6)
+      rest-client (~> 1.6.0)
+    oa-core (0.1.6)
+      rack (~> 1.1)
+    oa-enterprise (0.1.6)
+      net-ldap (~> 0.1.1)
+      nokogiri (~> 1.4.2)
+      oa-core (= 0.1.6)
+      pyu-ruby-sasl (~> 0.0.3.1)
+      rubyntlm (~> 0.1.1)
+    oa-oauth (0.1.6)
+      multi_json (~> 0.0.2)
+      nokogiri (~> 1.4.2)
+      oa-core (= 0.1.6)
+      oauth (~> 0.4.0)
+      oauth2 (~> 0.1.0)
+    oa-openid (0.1.6)
+      oa-core (= 0.1.6)
+      rack-openid (~> 1.2.0)
+      ruby-openid-apps-discovery
+    oauth (0.4.4)
+    oauth2 (0.1.1)
+      faraday (~> 0.5.0)
+      multi_json (~> 0.0.4)
+    omniauth (0.1.6)
+      oa-basic (= 0.1.6)
+      oa-core (= 0.1.6)
+      oa-enterprise (= 0.1.6)
+      oa-oauth (= 0.1.6)
+      oa-openid (= 0.1.6)
+    orm_adapter (0.0.4)
     pg (0.10.0)
     polyglot (0.3.1)
+    pyu-ruby-sasl (0.0.3.2)
     rack (1.2.1)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
@@ -103,6 +163,8 @@ GEM
     rake (0.8.7)
     rdiscount (1.6.5)
     responders (0.6.2)
+    rest-client (1.6.1)
+      mime-types (>= 1.16)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
@@ -122,12 +184,18 @@ GEM
     ruby-debug-base (0.10.4)
       linecache (>= 0.3)
     ruby-openid (2.1.8)
+    ruby-openid-apps-discovery (1.2.0)
+      ruby-openid (>= 2.1.7)
+    rubyntlm (0.1.1)
+    sass (3.1.0.alpha.218)
     shoulda (2.11.3)
     term-ansicolor (1.0.5)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
+    warden (1.0.3)
+      rack (>= 1.0.0)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -141,21 +209,25 @@ DEPENDENCIES
   aaronh-chronic
   awesome_print
   coderay
+  compass (~> 0.11.beta)
+  compass-less-plugin
   cucumber-rails
+  devise!
   factory_girl
+  foreigner
   formtastic
-  haml
+  haml (~> 3.1.0.alpha)
   hpricot
   inherited_resources (~> 1.1)
   lesstile
+  oa-openid
+  omniauth
   pg
-  rack-openid
   rails (= 3.0.3)
   rdiscount
   rspec
   rspec-rails
   ruby-debug
-  ruby-openid
   shoulda
   webrat
   will_paginate!
