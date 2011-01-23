@@ -1,11 +1,21 @@
-// This import applies a global reset to any page that imports this stylesheet.
-@import blueprint/reset
-
 @import partials/base
+@import partials/defaults
+@import blueprint/interaction
 
-// Combine the partials into a single screen stylesheet.
-@import lessframework/text/15
-@import partials/headings
-@import partials/columns
-@import partials/page
-@import partials/form
+
+@import partials/layout
+
+// show-grid loads a 64+16x24 grid image by default
+// For other grid settings, run `compass grid-img 30+10x20`
+// Where 30 is the column width, 10 is the gutter width,
+// and 20 is the (optional) line-height.
+
+/* Styles --------------------------------------------------------------
+
+#flash
+  +blueprint-interaction
+
+#header
+  +rhythm(0, 1, 1, 0, $col-width)
+  +pad(1,1)
+  background: $color-header-bg image-url('bg.png') repeat-x

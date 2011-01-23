@@ -38,8 +38,8 @@ gem 'inherited_resources', '~> 1.1'
 
 gem 'compass', '~> 0.11.beta'
 gem 'haml', '~> 3.1.0.alpha'
-gem 'compass-less-plugin'
-
+#gem 'compass-less-plugin'
+gem 'compass-susy-plugin'
 #filters
 gem 'rdiscount'
 gem 'RedCloth'

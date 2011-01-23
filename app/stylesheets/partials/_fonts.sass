@@ -1,2 +1,47 @@
-$body-font-stack: sans-serif
-$alt-font-stack: "calluna-1", "calluna-2", serif
+$base-font-size: 16px
+$base-line-height: 24px
+
+$gigantic-font-size: 110px
+$huge-font-size: 68px
+$large-font-size: 42px
+$big-font-size: 26px
+$small-font-size: 13px
+
+$sans-font-stack: "PTSans", "Arial", sans-serif
+$serif-font-stack: "calluna-1", "calluna-2", serif
+$monospace-font-stack: "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, Courier, monospace, sans-serif
+
+=base-font
+  font-family: $sans-font-stack
+=sans-font
+  font-family: $sans-font-stack
+  
+=alt-font
+  font-family: $serif-font-stack
+=serif-font
+  font-family: $serif-font-stack
+
+=monospace-family
+  font-family: $monospace-font-stack
+
+=gigantic
+  +adjust-font-size-to($gigantic-font-size)
+  letter-spacing: -2px
+
+=huge
+  +adjust-font-size-to($huge-font-size)
+  letter-spacing: -1px
+
+=large
+  +adjust-font-size-to($large-font-size)
+
+=big
+  +adjust-font-size-to($big-font-size)
+
+=normal
+  +adjust-font-size-to($base-font-size)
+
+=small
+  +adjust-font-size-to($small-font-size)
+
+@import fonts/pt-sans

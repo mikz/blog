@@ -4,6 +4,7 @@
     %meta{:charset => "utf-8"}
     %title= html_title yield(:page_title)
     = csrf_meta_tag
+    
     = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
     = formtastic_stylesheet_link_tag
     = stylesheet_link_tag 'print.css', :media => 'print'
@@ -14,19 +15,21 @@
     = javascript_include_tag 'lib/head'
     = yield(:head)
     :javascript
-      #{head_js %w{lib/jquery lib/rails}, javascripts, :app}
       head.js("http://use.typekit.com/zyg7xdu.js", function(){try{Typekit.load();}catch(e){}});
+      #{head_js %w{lib/jquery lib/rails}, javascripts, :app}
+    
     = open_id_delegation_link_tags(enki_config[:open_id_delegation, :server], enki_config[:open_id_delegation, :delegate]) if enki_config[:open_id_delegation]
     
   %body
-    #container.showgrid
+    .container.showgrid
       %header#header
         %h1#page_heading
           %a{:href => root_url}= enki_config[:title]
+        .helper
       %section#main
         = render :partial => "shared/flashes"
         = yield
-      %section#navigation
+      %nav#navigation
         %h2 Pages
         %ul
           - page_links_for_navigation.each do |link|

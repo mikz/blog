@@ -1,11 +1,31 @@
+#{headings()}
+  +alt-font
+
+h4, h5, h6
+  +trailer
+
 h1
-  @include huge
+  +huge
+  +trailer(1, $huge-font-size)
+  +leader(2, $huge-font-size)
 
 h2
-  @include large
+  +large
+  +trailer(1, $large-font-size)
+  +leader(2, $large-font-size)
 
 h3
-  @include big
+  +big
+  +trailer(1, $big-font-size)
+  +leader(2, $big-font-size)
+  font-weight: bolder
+  
+h4
+  font-weight: bold
 
-#{headings(2)}
-  font-family: $alt-font-stack
+h5
+  @extend .smallcaps
+  text-transform: lowercase
+
+h6
+  font-style: italic

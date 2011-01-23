@@ -1,0 +1,21 @@
++susy
+
+body > .container
+  +container
+
+.container.showgrid
+  +show-grid("grid.png")
+
+
+body > .container
+  & > header, & > footer
+    +full
+    +alpha
+  & > section
+    +alpha
+    +columns(9)
+  & > nav
+    +omega
+    +leader
+    +columns(3)
+    

@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def title= title
+    content_for(:page_title, title)
+  end
+  
   def author
     Struct.new(:name, :email).new(enki_config[:author][:name], enki_config[:author][:email])
   end
