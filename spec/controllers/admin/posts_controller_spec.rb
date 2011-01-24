@@ -5,16 +5,16 @@ describe Admin::PostsController do
     before(:each) do
       @posts = [mock_model(Post), mock_model(Post)]
       Post.stub!(:paginate).and_return(@posts)
-      session[:logged_in] = true
+      login_admin
       get :index
     end
 
     it "is successful" do
-      response.should be_success
+      should respond_with(:success)
     end
 
     it "renders index template" do
-      response.should render_template('index')
+      should render_template('index')
     end
 
     it "finds posts for the view" do
@@ -26,16 +26,16 @@ describe Admin::PostsController do
     before(:each) do
       @post = mock_model(Post)
       Post.stub!(:find).and_return(@post)
-      session[:logged_in] = true
+      login_admin
       get :show, :id => 1
     end
 
     it "is successful" do
-      response.should be_success
+      should respond_with(:success)
     end
 
     it "renders show template" do
-      response.should render_template('show')
+      should render_template('show')
     end
 
     it "finds post for the view" do
@@ -47,11 +47,11 @@ describe Admin::PostsController do
     before(:each) do
       @post = mock_model(Post)
       Post.stub!(:new).and_return(@post)
-      session[:logged_in] = true
+      login_admin
       get :new
     end
 
-    it('is successful') { response.should be_success}
+    it('is successful') { should respond_with(:success)}
     it('assigns post for the view') { assigns[:post] == @post }
   end
 
@@ -63,7 +63,7 @@ describe Admin::PostsController do
     end
 
     def do_put
-      session[:logged_in] = true
+      login_admin
       put :update, :id => 1, :post => valid_post_attributes
     end
 
@@ -91,13 +91,13 @@ describe Admin::PostsController do
     end
 
     def do_put
-      session[:logged_in] = true
+      login_admin
       put :update, :id => 1, :post => {}
     end
 
     it 'renders show' do
       do_put
-      response.should render_template('show')
+      should render_template('show')
     end
 
     it 'is unprocessable' do
@@ -108,7 +108,7 @@ describe Admin::PostsController do
 
   describe 'handling POST to create with valid attributes' do
     it 'creates a post' do
-      session[:logged_in] = true
+      login_admin
       lambda { post :create, :post => valid_post_attributes }.should change(Post, :count).by(1)
     end
   end
@@ -129,7 +129,7 @@ describe Admin::PostsController do
     end
 
     def do_delete
-      session[:logged_in] = true
+      login_admin
       delete :destroy, :id => 1
     end
 
@@ -153,7 +153,7 @@ describe Admin::PostsController do
     end
 
     def do_delete
-      session[:logged_in] = true
+      login_admin
       delete :destroy, :id => 1, :format => 'json'
     end
 
@@ -172,7 +172,7 @@ end
 describe Admin::PostsController, 'with an AJAX request to preview' do
   before(:each) do
     Post.should_receive(:build_for_preview).and_return(@post = mock_model(Post))
-    session[:logged_in] = true
+    login_admin
     xhr :post, :preview, :post => {
       :title        => 'My Post',
       :body         => 'body',

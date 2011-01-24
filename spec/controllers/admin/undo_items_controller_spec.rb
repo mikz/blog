@@ -5,12 +5,12 @@ describe Admin::UndoItemsController do
     before(:each) do
       @undo_items = [mock_model(UndoItem)]
       UndoItem.stub!(:find).and_return(@undo_items)
-      session[:logged_in] = true
+      login_admin
       get :index
     end
 
-    it("is successful")                 { response.should be_success }
-    it("renders index template")        { response.should render_template('index') }
+    it("is successful")                 { should respond_with(:success) }
+    it("renders index template")        { should render_template('index') }
     it("finds undo items for the view") { assigns[:undo_items].should == @undo_items }
   end
 
@@ -23,7 +23,7 @@ describe Admin::UndoItemsController do
 
     def do_post
       request.env["HTTP_REFERER"] = "/bogus"
-      session[:logged_in] = true
+      login_admin
       post :undo, :id => 1
     end
 
@@ -41,7 +41,7 @@ describe Admin::UndoItemsController do
 
     def do_post
       request.env["HTTP_REFERER"] = "/bogus"
-      session[:logged_in] = true
+      login_admin
       post :undo, :id => 1, :format => 'json'
     end
 
@@ -58,7 +58,7 @@ describe Admin::UndoItemsController do
 
     def do_post
       request.env["HTTP_REFERER"] = "/bogus"
-      session[:logged_in] = true
+      login_admin
       post :undo, :id => 1
     end
 
@@ -75,7 +75,7 @@ describe Admin::UndoItemsController do
 
     def do_post
       request.env["HTTP_REFERER"] = "/bogus"
-      session[:logged_in] = true
+      login_admin
       post :undo, :id => 1, :format => 'json'
     end
 

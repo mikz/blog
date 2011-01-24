@@ -5,12 +5,12 @@ describe Admin::CommentsController do
     before(:each) do
       @posts = [mock_model(Comment), mock_model(Comment)]
       Comment.stub!(:paginate).and_return(@comments)
-      session[:logged_in] = true
+      login_admin
       get :index
     end
 
-    it("is successful")               { response.should be_success }
-    it("renders index template")      { response.should render_template('index') }
+    it("is successful")               { should respond_with(:success) }
+    it("renders index template")      { should render_template('index') }
     it("finds comments for the view") { assigns[:comments].should == @comments }
   end
 
@@ -18,12 +18,12 @@ describe Admin::CommentsController do
     before(:each) do
       @comment = Comment.new
       Comment.stub!(:find).and_return(@comment)
-      session[:logged_in] = true
+      login_admin
       get :show, :id => 1
     end
 
-    it("is successful")              { response.should be_success }
-    it("renders show template")      { response.should render_template('show') }
+    it("is successful")              { should respond_with(:success) }
+    it("renders show template")      { should render_template('show') }
     it("finds comment for the view") { assigns[:comment].should == @comment }
   end
 
@@ -37,7 +37,7 @@ describe Admin::CommentsController do
     end
 
     def do_put
-      session[:logged_in] = true
+      login_admin
       put :update, :id => 1, :comment => @attributes
     end
 
@@ -68,13 +68,13 @@ describe Admin::CommentsController do
     end
 
     def do_put
-      session[:logged_in] = true
+      login_admin
       put :update, :id => 1, :comment => @attributes
     end
 
     it("renders show") do
       do_put
-      response.should render_template('show')
+      should render_template('show')
     end
 
     it("assigns comment for the view") do
@@ -91,7 +91,7 @@ describe Admin::CommentsController do
     end
 
     def do_delete
-      session[:logged_in] = true
+      login_admin
       delete :destroy, :id => 1
     end
 
@@ -115,7 +115,7 @@ describe Admin::CommentsController do
     end
 
     def do_delete
-      session[:logged_in] = true
+      login_admin
       delete :destroy, :id => 1, :format => 'json'
     end
 

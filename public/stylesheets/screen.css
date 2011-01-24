@@ -393,36 +393,28 @@ tfoot {
 
 /* Forms -------------------------------------------------------------- */
 /* line 192, ../../app/stylesheets/partials/_defaults.sass */
-fieldset {
-  margin-bottom: 1.5em;
-  border-style: solid;
-  border-width: 0.063em;
-  padding: 1.438em;
-}
-
-/* line 196, ../../app/stylesheets/partials/_defaults.sass */
 legend {
   font-size: 1.125em;
   line-height: 1.333em;
   font-weight: bold;
 }
 
-/* line 200, ../../app/stylesheets/partials/_defaults.sass */
+/* line 196, ../../app/stylesheets/partials/_defaults.sass */
 input[type="radio"], input[type="checkbox"] {
   vertical-align: baseline;
 }
 
-/* line 203, ../../app/stylesheets/partials/_defaults.sass */
+/* line 199, ../../app/stylesheets/partials/_defaults.sass */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 206, ../../app/stylesheets/partials/_defaults.sass */
+/* line 202, ../../app/stylesheets/partials/_defaults.sass */
 label {
   font-weight: bold;
 }
 
-/* line 211, ../../app/stylesheets/partials/_defaults.sass */
+/* line 207, ../../app/stylesheets/partials/_defaults.sass */
 .textinput, textarea, input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=date], input[type=datetime], input[type=datetime-local], input[type=month], input[type=week], input[type=time], input[type=number], input[type=range], input[type=search], input[type=color] {
   font-family: "PTSans", "Arial", sans-serif;
   font-size: 0.875em;
@@ -441,22 +433,22 @@ label {
   height: 2.571em;
 }
 
-/* line 222, ../../app/stylesheets/partials/_defaults.sass */
+/* line 218, ../../app/stylesheets/partials/_defaults.sass */
 textarea {
   height: 11.143em;
   vertical-align: text-bottom;
 }
 
-/* line 233, ../../app/stylesheets/partials/_defaults.sass */
+/* line 229, ../../app/stylesheets/partials/_defaults.sass */
 input[type=search] {
   -webkit-appearance: none;
 }
-/* line 235, ../../app/stylesheets/partials/_defaults.sass */
+/* line 231, ../../app/stylesheets/partials/_defaults.sass */
 input[type=search]::-webkit-search-decoration {
   display: none;
 }
 
-/* line 238, ../../app/stylesheets/partials/_defaults.sass */
+/* line 234, ../../app/stylesheets/partials/_defaults.sass */
 button {
   width: auto;
   overflow: visible;
@@ -527,6 +519,98 @@ body > .container > nav {
 }
 
 /* Styles -------------------------------------------------------------- */
+/* line 1, ../../app/stylesheets/tipsy.scss */
+.tipsy {
+  padding: 5px;
+  font-size: 10px;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  background-repeat: no-repeat;
+  background-image: url('/images/tipsy.gif?1262693646');
+}
+
+/* line 2, ../../app/stylesheets/tipsy.scss */
+.tipsy-inner {
+  padding: 5px 8px 4px 8px;
+  background-color: black;
+  color: white;
+  max-width: 200px;
+  text-align: center;
+}
+
+/* line 3, ../../app/stylesheets/tipsy.scss */
+.tipsy-inner {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+/* line 4, ../../app/stylesheets/tipsy.scss */
+.tipsy-north {
+  background-position: top center;
+}
+
+/* line 5, ../../app/stylesheets/tipsy.scss */
+.tipsy-south {
+  background-position: bottom center;
+}
+
+/* line 6, ../../app/stylesheets/tipsy.scss */
+.tipsy-east {
+  background-position: right center;
+}
+
+/* line 7, ../../app/stylesheets/tipsy.scss */
+.tipsy-west {
+  background-position: left center;
+}
+
+/* line 1, ../../app/stylesheets/partials/_buttons.sass */
+.auth_providers {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+}
+/* line 7, ../../../../.rvm/gems/ree-1.8.7-2010.02@enki/gems/compass-0.11.beta.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+.auth_providers {
+  *display: inline;
+}
+/* line 4, ../../app/stylesheets/partials/_buttons.sass */
+.auth_providers button.auth_provider {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+}
+
+/* line 2, ../../app/stylesheets/partials/_forms.sass */
+form.formtastic ul.errors {
+  margin-bottom: 1.5em;
+}
+/* line 5, ../../app/stylesheets/partials/_forms.sass */
+form.formtastic fieldset.inputs > ol > li {
+  margin-bottom: 1.5em;
+}
+/* line 7, ../../app/stylesheets/partials/_forms.sass */
+form.formtastic fieldset.inputs > ol > li p.inline-hints, form.formtastic fieldset.inputs > ol > li p.inline-errors {
+  margin-bottom: 0em;
+}
+/* line 9, ../../app/stylesheets/partials/_forms.sass */
+form.formtastic fieldset.inputs > ol > li p.inline-hints {
+  max-width: 72%;
+}
+/* line 11, ../../app/stylesheets/partials/_forms.sass */
+form.formtastic fieldset.inputs > ol > li.has_auth_providers p.inline-hints {
+  font-size: 1em;
+  line-height: 3em;
+}
+/* line 14, ../../app/stylesheets/partials/_forms.sass */
+form.formtastic ol, form.formtastic ul, form.formtastic dl {
+  margin-bottom: 0em;
+}
+
 /* line 4, ../../../../.rvm/gems/ree-1.8.7-2010.02@enki/gems/compass-0.11.beta.1/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
 #flash .feedback, #flash .error, #flash .alert, #flash .notice, #flash .success, #flash .info {
   padding: 0.8em;
@@ -592,12 +676,12 @@ body > .container > nav {
   color: white;
 }
 
-/* line 18, ../../app/stylesheets/screen.sass */
+/* line 21, ../../app/stylesheets/screen.sass */
 #header {
-  margin-top: 0px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  margin-bottom: 0px;
+  margin-top: 0em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  margin-bottom: 0em;
   padding-left: 8.197%;
   padding-right: 8.197%;
   background: #00001c url('/images/bg.png?1295792023') repeat-x;

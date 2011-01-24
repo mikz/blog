@@ -1,0 +1,21 @@
+%section.comments
+  %h2#new-comment Post a comment
+  - url = url_for(:anchor => 'new-comment')
+  
+  = semantic_form_for([@post, @comment]) do |form|
+    = form.semantic_errors
+    = form.inputs do
+      - if user_signed_in?
+        = form.input :author, :as => :string, :hint => "Not you? #{logout_link(url)}".html_safe, :input_html => {:disabled => true, :value => current_user.label}
+      - else
+        = form.input :author_name, :hint => "Type name or login with any of these services: #{auth_providers({:type => :submit, :size => 32, :label => false}, {:return_to => url})}".html_safe, :wrapper_html => {:class => :has_auth_providers}
+      
+      = form.input :body, :hint => "(#{link_to "lesstile enabled", "http://lesstile.rubyforge.org"} - surround code blocks with ---)".html_safe
+    = form.buttons
+
+  %ol.comments
+    - @post.approved_comments.each do |comment|
+      %li.comment{:id => "comment-#{comment.id}"}
+        = render :partial => 'comments/comment', :locals => {:comment => comment} 
+
+  .related Looking for more? Head on over to the #{link_to("archives", archives_path)}.

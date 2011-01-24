@@ -14,12 +14,12 @@ describe ArchivesController do
 
     it "should be successful" do
       do_get
-      response.should be_success
+      should respond_with(:success)
     end
 
     it "should render index template" do
       do_get
-      response.should render_template('index')
+      should render_template('index')
     end
 
     it "should assign the found months for the view" do

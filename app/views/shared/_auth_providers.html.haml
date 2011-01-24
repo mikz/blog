@@ -1,7 +1,6 @@
-- text ||= nil
-- size ||= nil
-= auth_provider 'Facebook', {:label => text, :size => size}
-= auth_provider 'Twitter', {:label => text, :size => size}
-= auth_provider 'OpenID', {:label => text, :size => size, :provider => :open_id}
-= auth_provider 'Google', {:label => text, :size => size}
-= auth_provider 'Google Apps', {:label => text, :size => size, :provider => :google_apps}
+%span.auth_providers
+  = auth_provider 'Facebook', options, url
+  = auth_provider 'Twitter', options, url
+  = auth_provider 'OpenID', options.reverse_merge(:provider => :open_id), url
+  = auth_provider 'Google', options, url
+  = auth_provider 'Google Apps', options.reverse_merge(:provider => :google_apps), url

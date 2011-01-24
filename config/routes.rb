@@ -7,13 +7,9 @@ Enki::Application.routes.draw do
     end
   end
   
-  namespace :users do
-    resources :authentications, :only => [:index, :destroy]
-  end
+  
   
   namespace :admin do
-    resource :session
-
     resources :posts, :pages do
       post 'preview', :on => :collection
     end
@@ -21,12 +17,20 @@ Enki::Application.routes.draw do
     resources :undo_items do
       post 'undo', :on => :member
     end
-
+    
+    resource :session, :only => [:destroy]
+    
     match 'health(/:action)' => 'health', :action => 'index', :as => :health
 
     root :to => 'dashboard#show'
   end
-
+  
+  authenticate :user do
+    resources :users, :only => [:show] do
+      resources :authentications, :only => [:index, :destroy]
+    end
+  end
+  
   resources :archives, :only => [:index]
   resources :pages, :only => [:show]
   resources :posts, :only => [:show]
@@ -35,6 +39,7 @@ Enki::Application.routes.draw do
     post ':year/:month/:day/:slug/comments' => 'comments#index'
     get ':year/:month/:day/:slug/comments/new' => 'comments#new'
     get ':year/:month/:day/:slug' => 'posts#show'
+    get ':year/:month/:day/:slug/comments' => redirect("/%{year}/%{month}/%{day}/%{slug}")
   end
 
   scope :to => 'posts#index' do

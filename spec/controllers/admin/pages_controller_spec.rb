@@ -5,16 +5,16 @@ describe Admin::PagesController do
     before(:each) do
       @pages = [mock_model(Page), mock_model(Page)]
       Page.stub!(:paginate).and_return(@pages)
-      session[:logged_in] = true
+      login_admin
       get :index
     end
 
     it "is successful" do
-      response.should be_success
+      should respond_with(:success)
     end
 
     it "renders index template" do
-      response.should render_template('index')
+      should render_template('index')
     end
 
     it "finds pages for the view" do
@@ -26,16 +26,16 @@ describe Admin::PagesController do
     before(:each) do
       @page = mock_model(Page)
       Page.stub!(:find).and_return(@page)
-      session[:logged_in] = true
+      login_admin
       get :show, :id => 1
     end
 
     it "is successful" do
-      response.should be_success
+      should respond_with(:success)
     end
 
     it "renders show template" do
-      response.should render_template('show')
+      should render_template('show')
     end
 
     it "finds page for the view" do
@@ -47,11 +47,11 @@ describe Admin::PagesController do
     before(:each) do
       @page = mock_model(Page)
       Page.stub!(:new).and_return(@page)
-      session[:logged_in] = true
+      login_admin
       get :new
     end
 
-    it('is successful') { response.should be_success}
+    it('is successful') { should respond_with(:success)}
     it('assigns page for the view') { assigns[:page] == @page }
   end
 
@@ -63,7 +63,7 @@ describe Admin::PagesController do
     end
 
     def do_put
-      session[:logged_in] = true
+      login_admin
       put :update, :id => 1, :page => {
         'title' => 'My Post',
         'slug'  => 'my-post',
@@ -97,13 +97,13 @@ describe Admin::PagesController do
     end
 
     def do_put
-      session[:logged_in] = true
+      login_admin
       put :update, :id => 1, :page => {}
     end
 
     it 'renders show' do
       do_put
-      response.should render_template('show')
+      should render_template('show')
     end
 
     it 'is unprocessable' do
@@ -116,7 +116,7 @@ end
 describe Admin::PagesController, 'with an AJAX request to preview' do
   before(:each) do
     Page.should_receive(:build_for_preview).and_return(@page = mock_model(Page))
-    session[:logged_in] = true
+    login_admin
     xhr :post, :preview, :page => {
       :title        => 'My Page',
       :body         => 'body'

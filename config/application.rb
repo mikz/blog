@@ -35,7 +35,10 @@ module Enki
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
-
+    
+    config.generators do |g|
+      g.test_framework :rspec, :fixture => true, :views => true, :fixture_replacement => :factory_girl
+    end
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
   end

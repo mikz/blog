@@ -1,0 +1,16 @@
+form.formtastic
+  ul.errors
+    +trailer
+  fieldset
+    &.inputs > ol > li
+      +trailer
+      p.inline-hints, p.inline-errors
+        +trailer(0)
+      p.inline-hints
+        max-width: 72%
+      &.has_auth_providers p.inline-hints
+        +adjust-font-size-to($base-font-size, 2)
+  
+  ol, ul, dl
+    +trailer(0)
+  

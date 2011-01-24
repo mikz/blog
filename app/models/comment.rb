@@ -1,33 +1,33 @@
 class Comment < ActiveRecord::Base
   DEFAULT_LIMIT = 15
 
+  attr_accessible       :body, :post, :author_name
+  
   attr_accessor         :openid_error
   attr_accessor         :openid_valid
 
   belongs_to            :post
+  belongs_to            :author, :class_name => 'User'
 
   before_save           :apply_filter
   after_save            :denormalize
   after_destroy         :denormalize
 
-  validates_presence_of :author, :body, :post
-  validate :open_id_error_should_be_blank
+  validates_presence_of :body, :post
+
+  validate :open_id_error_should_be_blank, :author_name_or_user
 
   def open_id_error_should_be_blank
     errors.add(:base, openid_error) unless openid_error.blank?
   end
+  
+  def author_name_or_user
+    
+    errors.add_on_blank :author_name if author.nil?
+  end
 
   def apply_filter
     self.body_html = Lesstile.format_as_xhtml(self.body, :code_formatter => Lesstile::CodeRayFormatter)
-  end
-
-  def blank_openid_fields
-    self.author_url = ""
-    self.author_email = ""
-  end
-
-  def requires_openid_authentication?
-    !!self.author.index(".")
   end
 
   def trusted_user?
@@ -56,15 +56,10 @@ class Comment < ActiveRecord::Base
   end
 
   # Delegates
-  def post_title
-    post.title
-  end
+  delegate :title, :to => :post, :prefix => true, :allow_nil => true
+  delegate :label, :to => :author, :prefix => true, :allow_nil => true
 
   class << self
-    def protected_attribute?(attribute)
-      [:author, :body].include?(attribute.to_sym)
-    end
-
     def new_with_filter(params)
       comment = Comment.new(params)
       comment.created_at = Time.now
@@ -74,10 +69,6 @@ class Comment < ActiveRecord::Base
 
     def build_for_preview(params)
       comment = Comment.new_with_filter(params)
-      if comment.requires_openid_authentication?
-        comment.author_url = comment.author
-        comment.author     = "Your OpenID Name"
-      end
       comment
     end
 

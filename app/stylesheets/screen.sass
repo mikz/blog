@@ -11,11 +11,14 @@
 // and 20 is the (optional) line-height.
 
 /* Styles --------------------------------------------------------------
+@import tipsy
+@import partials/buttons
+@import partials/forms
 
 #flash
   +blueprint-interaction
 
 #header
-  +rhythm(0, 1, 1, 0, $col-width)
+  +rhythm(0, 1, 1, 0)
   +pad(1,1)
   background: $color-header-bg image-url('bg.png') repeat-x

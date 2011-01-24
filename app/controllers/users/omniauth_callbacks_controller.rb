@@ -2,6 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_filter :verify_authenticity_token
   
   def create
+    session[:user_return_to] = params[:return_to]
     omniauth = request.env["omniauth.auth"]
 
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])

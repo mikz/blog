@@ -12,5 +12,9 @@ class ApplicationController < ActionController::Base
     I18n.locale = session[:locale] || I18n.default_locale
   end
   
+  def after_sign_out_path_for resource_or_scope
+    params[:return_to].presence || root_path
+  end
+  
   helper_method :enki_config
 end

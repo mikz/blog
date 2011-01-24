@@ -1,0 +1,9 @@
+- content_for(:head) do
+  - javascript 'lib/common'
+  - javascript 'lib/live-comment-preview'
+
+- title = post_title(@post)
+
+= render 'posts/post', :post => @post
+
+= render 'posts/comments'

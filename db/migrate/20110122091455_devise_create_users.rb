@@ -11,7 +11,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       
       # t.openid_authenticatable
       
-      t.string :email, :nick, :name, :first_name, :last_name, :gender
+      t.string :email, :nickname, :full_name
       
       t.boolean :admin, :null => false, :default => false
       t.timestamps

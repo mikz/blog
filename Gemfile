@@ -20,6 +20,7 @@ gem 'pg'
 
 #gem 'ruby-openid', :require => 'openid'
 #gem 'rack-openid', :require => 'rack/openid'
+gem 'ruby-openid-apps-discovery', :require => 'gapps_openid'
 
 # foreign keys
 gem 'foreigner'
@@ -38,6 +39,7 @@ gem 'inherited_resources', '~> 1.1'
 
 gem 'compass', '~> 0.11.beta'
 gem 'haml', '~> 3.1.0.alpha'
+gem 'html_truncator'
 #gem 'compass-less-plugin'
 gem 'compass-susy-plugin'
 #filters
@@ -55,10 +57,10 @@ gem 'lesstile'
 group :development, :test do
   gem 'cucumber-rails'
   gem 'webrat'
-  gem 'factory_girl'
+  gem 'factory_girl_rails', '~> 1.1.beta'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'shoulda'
+  gem 'shoulda-matchers'
   gem 'hpricot'
   gem 'awesome_print'
   

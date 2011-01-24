@@ -5,3 +5,11 @@ url:   http://blog.o2h.cz
 author:
   name:    Michal Cichra        # For copyright notice and ATOM feeds
   email:   m@o2h.cz # Exception emails will go here, and it is used in ATOM feeds
+
+
+# Delete the following section if your site will not be acting as an OpenID delegate (http://wiki.openid.net/Delegation)
+# If you're deploying with mongrel, make sure you read http://rhnh.net/2008/04/13/nginx-openid-delegation-and-yadis
+open_id_delegation:
+  server:   https://mojeid.cz/endpoint/
+  delegate: https://mikz.mojeid.cz/
+  xrds: https://mikz.mojeid.cz/xrds/

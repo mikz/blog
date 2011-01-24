@@ -10,16 +10,16 @@ describe Admin::DashboardController do
 
       CommentActivity.stub!(:find_recent).and_return(@comment_activity)
 
-      session[:logged_in] = true
+      login_admin
       get :show
     end
 
     it "is successful" do
-      response.should be_success
+      should respond_with(:success)
     end
 
     it "renders show template" do
-      response.should render_template('show')
+      should render_template('show')
     end
 
     it "finds posts for the view" do

@@ -11,6 +11,17 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by_permalink(*([:year, :month, :day, :slug].collect {|x| params[x] } << {:include => [:approved_comments, :tags]}))
-    @comment = Comment.new
+    comment_from_session
+  end
+  
+  private
+  def comment_from_session
+    begin
+      @comment = @post.comments.build(session[:pending_comment])
+    rescue
+      @comment = @post.comments.build
+    ensure
+      session[:pending_comment] = nil
+    end
   end
 end

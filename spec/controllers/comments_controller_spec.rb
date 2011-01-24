@@ -4,10 +4,7 @@ describe CommentsController, 'with GET to #index' do
   include UrlHelper
 
   it 'redirects to the parent post URL' do
-    @mock_post = mock_model(Post,
-      :published_at => 1.year.ago,
-      :slug         => 'a-post'
-    )
+    @mock_post = Factory(:post)
     Post.stub!(:find_by_permalink).and_return(@mock_post)
     get :index, :year => '2007', :month => '01', :day => '01', :slug => 'a-post'
     response.should be_redirect
@@ -34,8 +31,8 @@ end
 
 shared_examples_for "invalid comment" do
   it 'renders posts/show' do
-    response.should be_success
-    response.should render_template('posts/show')
+    should respond_with(:success)
+    should render_template('posts/show')
   end
 
   it 'leaves comment in invalid state' do
@@ -66,12 +63,10 @@ describe CommentsController, 'handling commenting' do
       mock_post!
 
       post :index, :year => '2007', :month => '01', :day => '01', :slug => 'a-post', :comment => {
-        :author => 'Don Alias',
+        :author_name => 'Don Alias',
         :body   => 'This is a comment',
 
         # Attributes you are not allowed to set
-        :author_url              => 'http://www.enkiblog.com',
-        :author_email            => 'donalias@enkiblog.com',
         :created_at              => @created_at = 1.year.ago,
         :updated_at              => @updated_at = 1.year.ago,
       }
@@ -79,19 +74,11 @@ describe CommentsController, 'handling commenting' do
 
 
     it "allows setting of author" do
-      assigns(:comment).author.should == 'Don Alias'
+      assigns(:comment).author_name.should == 'Don Alias'
     end
 
     it "allows setting of body" do
       assigns(:comment).body.should == 'This is a comment'
-    end
-
-    it "forbids setting of author_url" do
-      assigns(:comment).author_url.should be_blank
-    end
-
-    it "forbids setting of author_email" do
-      assigns(:comment).author_email.should be_blank
     end
 
     it "forbids setting of created_at" do
@@ -112,7 +99,7 @@ describe CommentsController, 'with an AJAX request to new' do
       :author => 'Don Alias',
       :body   => 'A comment'
     }
-    response.should be_success
+    should respond_with(:success)
   end
 
   it "assigns a new comment for the view" do

@@ -3,12 +3,12 @@ require File.dirname(__FILE__) + '/../spec_helper'
 shared_examples_for 'successful posts list' do
   it "should be successful" do
     do_get
-    response.should be_success
+    should respond_with(:success)
   end
 
   it "should render index template" do
     do_get
-    response.should render_template('index')
+    should render_template('index')
   end
 
   it "should assign the found posts for the view" do
@@ -19,14 +19,14 @@ end
 
 shared_examples_for "ATOM feed" do
   it "renders with no layout" do
-    response.should render_template(nil)
+    should render_template(nil)
   end
 end
 
 describe PostsController do
   describe 'handling GET to index'do
     before(:each) do
-      @posts = [mock_model(Post)]
+      @posts = [Factory(:post)]
       Post.stub!(:find_recent).and_return(@posts)
     end
 
@@ -44,7 +44,7 @@ describe PostsController do
 
   describe 'handling GET to index with tag'do
     before(:each) do
-      @posts = [mock_model(Post)]
+      @posts = [Factory(:post)]
       Post.stub!(:find_recent).and_return(@posts)
     end
 
@@ -86,7 +86,7 @@ describe PostsController do
 
   describe 'handling GET to /posts.atom'do
     before(:each) do
-      @posts = [mock_model(Post)]
+      @posts = [Factory(:post)]
       Post.stub!(:find_recent).and_return(@posts)
     end
 
@@ -106,7 +106,7 @@ describe PostsController do
 
   describe 'handling GET to /posts.atom with tag'do
     before(:each) do
-      @posts = [mock_model(Post)]
+      @posts = [Factory(:post)]
       Post.stub!(:find_recent).and_return(@posts)
     end
 
@@ -126,10 +126,8 @@ describe PostsController do
 
   describe "handling GET for a single post" do
     before(:each) do
-      @post = mock_model(Post)
-      @comment = mock_model(Post)
+      @post = Factory(:post)
       Post.stub!(:find_by_permalink).and_return(@post)
-      Comment.stub!(:new).and_return(@comment)
     end
 
     def do_get
@@ -138,12 +136,12 @@ describe PostsController do
 
     it "should be successful" do
       do_get
-      response.should be_success
+      should respond_with(:success)
     end
 
     it "should render show template" do
       do_get
-      response.should render_template('show')
+      should render_template('show')
     end
 
     it "should find the post requested" do
@@ -158,7 +156,7 @@ describe PostsController do
 
     it "should assign a new comment for the view" do
       do_get
-      assigns[:comment].should equal(@comment)
+      should assign_to(:comment)
     end
   end
 end

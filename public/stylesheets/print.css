@@ -335,13 +335,6 @@ tfoot {
 }
 
 /* Forms -------------------------------------------------------------- */
-fieldset {
-  margin-bottom: 1.5em;
-  border-style: solid;
-  border-width: 0.063em;
-  padding: 1.438em;
-}
-
 legend {
   font-size: 1.125em;
   line-height: 1.333em;

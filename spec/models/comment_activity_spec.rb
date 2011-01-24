@@ -4,9 +4,7 @@ describe CommentActivity, '#comments' do
 
   def valid_comment_attributes(extra = {})
     {
-      :author       => 'Don Alias',
-      :author_url   => "me",
-      :author_email => "me@fake.com",
+      :author_name  => 'Don Alias',
       :body         => 'This is a comment',
       :post         => Post.create!(:title => 'My Post', :body => "body", :tag_list => "ruby")
     }.merge(extra)

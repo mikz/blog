@@ -3,3 +3,5 @@
 --loadby mtime
 --reverse
 --debug
+--backtrace
+-f t

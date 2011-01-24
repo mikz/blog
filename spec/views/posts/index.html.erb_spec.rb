@@ -11,6 +11,7 @@ describe "/posts/index.html.erb" do
     mock_post = mock_model(Post,
       :title             => "A post",
       :body_html         => "Posts contents!",
+      :short_body_html   => "Short version",
       :published_at      => 1.year.ago,
       :slug              => 'a-post',
       :approved_comments => [mock_model(Comment)],

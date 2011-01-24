@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe "/posts/show.html.erb" do
+describe "/posts/show.html" do
   include UrlHelper
-
+  
   before(:each) do
     view.stub!(:enki_config).and_return(Enki::Config.default)
 
@@ -12,17 +12,16 @@ describe "/posts/show.html.erb" do
 
     mock_comment = mock_model(Comment,
       :created_at              => 1.month.ago,
-      :author                  => "Don Alias",
-      :author_url              => "http://enkiblog.com",
-      :author_openid_authority => "http://enkiblog.com/server",
-      :body_html               => "A comment"
+      :author_name             => "Don Alias",
+      :body_html               => "A comment",
+      :author                  => nil
     )
 
     mock_comment2 = mock_model(Comment,
       :created_at              => 1.month.ago,
-      :author                  => "Don Alias",
-      :author_url              => '',
-      :body_html               => "A comment"
+      :author_name             => "Don Alias",
+      :body_html               => "A comment",
+      :author                  => nil
     )
 
     @post = mock_model(Post,
@@ -42,6 +41,7 @@ describe "/posts/show.html.erb" do
   end
 
   it "should render a post" do
-    render :template => "/posts/show.html.erb"
+    controller.request.path_parameters["id"] = 4
+    render :template => "posts/show.html.haml"
   end
 end

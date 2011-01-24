@@ -2,7 +2,7 @@
   %header
     %h1= link_to(post.title, post_path(post))
 
-  =raw post.body_html
+  =raw post.send(content ||= :body_html)
   
   %footer
     %ul

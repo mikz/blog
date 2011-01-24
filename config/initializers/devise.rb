@@ -133,8 +133,9 @@ Devise.setup do |config|
   require 'openid/store/filesystem'
   config.omniauth :open_id, OpenID::Store::Filesystem.new(Rails.root.join('tmp'))
   config.omniauth :google_apps, OpenID::Store::Filesystem.new(Rails.root.join('tmp')), :domain => "gmail.com"
-  config.omniauth :facebook, "My App ID", "My Secret Key" 
-  config.omniauth :twitter, "My App ID", "My Secret Key" 
+  config.omniauth :facebook, "My App ID", "My Secret Key"
+  config.omniauth :twitter, "My App ID", "My Secret Key"
+  
   # ==> Warden configuration
   # If you want to use other strategies, that are not (yet) supported by Devise,
   # you can configure them inside the config.warden block. The example below

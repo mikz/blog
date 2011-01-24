@@ -13,12 +13,19 @@ class User < ActiveRecord::Base
   attr_accessible :remember_me # :email, :password, :password_confirmation, 
   
   
+  def label
+    %{#{name} (#{email})}
+  end
   
   def apply_omniauth(omniauth)
-    self.email = omniauth['user_info']['email'] if email.blank?
+    self.user_info = omniauth['user_info']
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
   
+  def name
+    nickname.presence || full_name.presence || I18n.t(:anonymous)
+  end
+    
   def password_required?
     false
   end
@@ -27,34 +34,21 @@ class User < ActiveRecord::Base
     true
   end
   
-  def openid_fields=(fields)
-    fields.each do |key, value|
-      # Some AX providers can return multiple values per key
-      if value.is_a? Array
-        value = value.first
-      end
+protected
 
-      case key.to_s
-      when 'nickname', 'http://axschema.org/namePerson/friendly'
-        self.nick = value
-      when 'fullname', "http://axschema.org/namePerson"
-        self.name = value
-      when "email", "http://axschema.org/contact/email"
-        self.email = value
-      when "gender", "http://axschema.org/person/gender"
-        self.gender = value
+  def user_info= info
+    info.symbolize_keys.each_pair do |key, value|
+      case key
+      when :first_name, :last_name
+      when :name
+        self.full_name = value
+      when :email
+        self.email ||= value
       else
-        logger.error "Unknown OpenID field: #{key}"
+        setter = (key.to_s << "=").to_sym
+        self.send setter, value if self.respond_to?(setter) && self.send(key).blank?
       end
     end
-  end
-  
-  def self.build_from_identity_url(identity_url)
-    User.new(:identity_url => identity_url)
-  end
-  
-  def self.openid_optional_fields
-    ['nickname', 'fullname', 'email', "gender", 'http://axschema.org/namePerson/friendly', 'http://axschema.org/namePerson', "http://axschema.org/contact/email", "http://axschema.org/person/gender"]
   end
   
 end
