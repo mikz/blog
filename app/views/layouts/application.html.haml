@@ -6,6 +6,7 @@
     = csrf_meta_tag
     
     = formtastic_stylesheet_link_tag
+    = stylesheet_link_tag "//fonts.o2h.cz/calluna.css", "//fonts.o2h.cz/pt-sans.css"
     = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
     = stylesheet_link_tag 'print.css', :media => 'print'
     /[if lt IE 8]
@@ -15,13 +16,12 @@
     = javascript_include_tag 'lib/head'
     = yield(:head)
     :javascript
-      head.js("http://use.typekit.com/zyg7xdu.js", function(){try{Typekit.load();}catch(e){}});
       #{head_js %w{lib/jquery lib/jquery.tipsy lib/rails}, javascripts, :app}
     
     = open_id_delegation_link_tags
     
   %body
-    .container.showgrid
+    .container
       %header#header
         %h1#page_heading
           %a{:href => root_url}= enki_config[:title]

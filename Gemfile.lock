@@ -87,7 +87,6 @@ GEM
       json (~> 1.4.6)
     haml (3.1.0.alpha.147)
     has_scope (0.5.0)
-    hpricot (0.8.3)
     html_truncator (0.1.2)
       nokogiri (~> 1.4)
     i18n (0.5.0)
@@ -222,7 +221,6 @@ DEPENDENCIES
   foreigner
   formtastic
   haml (~> 3.1.0.alpha)
-  hpricot
   html_truncator
   inherited_resources (~> 1.1)
   lesstile

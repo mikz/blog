@@ -61,7 +61,6 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'hpricot'
   gem 'awesome_print'
   
   gem 'ruby-debug'
