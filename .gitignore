@@ -3,6 +3,7 @@ log
 tmp/**/*
 tmp
 config/database.yml
+config/newrelic.yml
 db/schema.rb
 .bundle
 *.log
